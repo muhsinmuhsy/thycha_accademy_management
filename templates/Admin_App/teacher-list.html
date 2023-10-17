@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+<main>
+    {% include 'alert.html' %}
+    <div class="container">
+      <!-- Title and Top Buttons Start -->
+      <div class="page-title-container">
+        <div class="row g-0">
+          <!-- Title Start -->
+          <div class="col-auto mb-3 mb-md-0 me-auto">
+            <div class="w-auto sw-md-30">
+              <a href="#" class="muted-link pb-1 d-inline-block breadcrumb-back">
+                <!-- <i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
+                <span class="text-small align-middle">Home</span> -->
+              </a>
+              <h1 class="mb-0 pb-0 display-4" id="title">teacher List</h1>
+            </div>
+          </div>
+          <!-- Title End -->
+
+          <!-- Top Buttons Start -->
+          <div class="w-100 d-md-none"></div>
+          <div class="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
+            <a href="{% url 'teacher-add' %}">
+                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto">
+                <i data-acorn-icon="plus"></i>
+                <span>Add teacher</span>
+                </button>
+            </a>
+            
+            
+             
+          </div>
+          <!-- Top Buttons End -->
+        </div>
+      </div>
+      <!-- Title and Top Buttons End -->
+
+      <!-- Controls Start -->
+      <div class="row mb-2">
+        <!-- Search Start -->
+        <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
+          <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
+
+            <form method="get">
+                <input type="text" name="q" placeholder="Search teachers" class="form-control" value="{{ search_query|default_if_none:'' }}">
+                
+                <span class="search-magnifier-icon" style="cursor: pointer;" onclick="submitForm()">
+                    <i data-acorn-icon="search"></i>
+                </span>
+            </form>
+          </div>
+        </div>
+        <script>
+            function submitForm() {
+                document.querySelector('form').submit();
+            }
+        </script>
+        <!-- Search End -->
+
+
+
+
+        <!-- Breakpoint Specific Responsive Start -->
+    <section class="scroll-section" id="breakpointSpecificResponsive">
+        
+        <div class="card">
+        <div class="card-body">
+            <div class="table-responsive-sm mb-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for teacher in teachers %}
+                            <tr>
+                              <th scope="row" >1</th>
+                              <td class="text-nowrap">
+                                <a href="{% url 'teacher-view' teacher_id=teacher.id %}">
+                                  {{ teacher.first_name }} {{ teacher.last_name }}
+                                </a>
+                              </td>
+                              <td class="text-nowrap">{{ teacher.place }}</td>
+                              <td class="text-nowrap">{{ teacher.mobile }}</td>
+                              <td class="text-nowrap">{{ teacher.email }}</td>
+                              <td class="text-nowrap">
+                                <a href="{% url 'teacher-view' teacher_id=teacher.id %}">
+                                  <i data-acorn-icon="eye" data-acorn-size="15"></i>
+                                </a>
+                                <a href="{% url 'teacher-edit' teacher_id=teacher.id %}">
+                                  <i data-acorn-icon="edit-square" data-acorn-size="15"></i>
+                                </a>
+                                <a href="{% url 'teacher-delete' teacher_id=teacher.id %}" onclick="return confirm('Do you want to delite this?')">
+                                  <i data-acorn-icon="bin" data-acorn-size="15"></i>
+                                </a>
+                              </td>
+                               
+                            </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+     
+        </div>
+        </div>
+    </section>
+        
+      
+
+      
+           
+          
+           
+
+    </div>
+  </main>
+
+{% endblock content %}

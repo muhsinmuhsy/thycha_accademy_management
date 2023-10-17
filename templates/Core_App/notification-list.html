@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+<main>
+    {% include 'alert.html' %}
+    <div class="container">
+      <!-- Title and Top Buttons Start -->
+      <div class="page-title-container">
+        <div class="row g-0">
+          <!-- Title Start -->
+          <div class="col-auto mb-3 mb-md-0 me-auto">
+            <div class="w-auto sw-md-30">
+              <a href="#" class="muted-link pb-1 d-inline-block breadcrumb-back">
+                <!-- <i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
+                <span class="text-small align-middle">Home</span> -->
+              </a>
+              <h1 class="mb-0 pb-0 display-4" id="title">notification List</h1>
+            </div>
+          </div>
+          <!-- Title End -->
+
+          <!-- Top Buttons Start -->
+          <div class="w-100 d-md-none"></div>
+          <div class="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
+            {% if user.is_student %}
+            {% else %}
+                <a href="{% url 'notification-add' %}">
+                    <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto">
+                        <i data-acorn-icon="plus"></i>
+                        <span>Add notification</span>
+                    </button>
+                </a>
+            {% endif %}
+            
+            
+             
+          </div>
+          <!-- Top Buttons End -->
+        </div>
+      </div>
+      <!-- Title and Top Buttons End -->
+
+      
+
+
+
+
+        <!-- Breakpoint Specific Responsive Start -->
+    <section class="scroll-section" id="breakpointSpecificResponsive">
+        
+        <div class="card">
+        <div class="card-body">
+            <div class="table-responsive-sm mb-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name </th>
+                        <th scope="col"></th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for notification in notifications %}
+                            <tr>
+                              <th scope="row" >1</th>
+                              <td class="text-nowrap">
+                                  {{ notification.user.first_name }} {{ notification.user.last_name }}
+                              </td>
+                              <td class="">{{ notification.text }}</td>
+                              
+                              <td class="text-nowrap">
+                                {% if notification.user == request.user %}
+                                    <a href="{% url 'notification-edit' notification_id=notification.id %}">
+                                    <i data-acorn-icon="edit-square" data-acorn-size="15"></i>
+                                    </a>
+                                
+                                    <a href="{% url 'notification-delete' notification_id=notification.id %}" onclick="return confirm('Do you want to delite this?')">
+                                    <i data-acorn-icon="bin" data-acorn-size="15"></i>
+                                    </a>
+                                {% endif %}
+                              </td>
+                               
+                            </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+     
+        </div>
+        </div>
+    </section>
+        
+      
+
+      
+           
+          
+           
+
+    </div>
+  </main>
+
+{% endblock content %}

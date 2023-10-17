@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+
+<main>
+  {% include 'alert.html' %}
+  <div class="container">
+    <!-- Title and Top Buttons Start -->
+    <div class="page-title-container">
+      <div class="row">
+        <!-- Title Start -->
+        <div class="col-12 col-md-7">
+          <h1 class="mb-0 pb-0 display-4" id="title"></h1>
+          <!-- <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+            <ul class="breadcrumb pt-0">
+              <li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="Pages.html">Pages</a></li>
+              <li class="breadcrumb-item"><a href="Pages.Profile.html">Profile</a></li>
+            </ul>
+          </nav> -->
+        </div>
+        <!-- Title End -->
+
+        <!-- Top Buttons Start -->
+        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
+          <a href="{% url 'teacher-edit' teacher_id=teacher.id %}">
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
+              <i data-acorn-icon="edit-square"></i>
+              <span>Edit</span>
+            </button>
+          </a>
+
+          <a href="{% url 'teacher-delete' teacher_id=teacher.id %}" onclick="return confirm('Do you want to delite this?')" style="padding-left: 10px;">
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
+              <i data-acorn-icon="bin"></i>
+              <span>Delete</span>
+            </button>
+          </a>
+        </div>
+
+        
+        <!-- Top Buttons End -->
+      </div>
+    </div>
+    <!-- Title and Top Buttons End -->
+
+    <div class="row">
+      <!-- Left Side Start -->
+      <div class="col-12 ">
+        <!-- Biography Start -->
+        <h2 class="small-title"></h2>
+        <div class="card mb-5">
+          <div class="card-body">
+            <div class="d-flex align-items-center flex-column mb-4">
+              <div class="d-flex align-items-center flex-column">
+                <div class="sw-13 position-relative mb-3">
+                  <img src="{{ teacher.image.url }}" class="img-fluid rounded-xl" alt="thumb" />
+                </div>
+                <div class="h5 mb-0">{{ teacher.first_name }} {{ teacher.last_name }}</div>
+                <!-- <div class="text-muted">Executive UI/UX Designer</div> -->
+                <div class="text-muted">
+                  <i data-acorn-icon="pin" class="me-1"></i>
+                  <span class="align-middle">{{ teacher.place }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="nav flex-column" role="tablist">
+              <p class=" px-0">
+                <i data-acorn-icon="" class="me-2" data-acorn-size="17">Username:</i>
+                <span class="align-middle">{{ teacher.username }}</span>
+              </p>
+              <br>
+              <p class=" active px-0 border-bottom border-separator-light">
+                <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
+                <span class="align-middle">{{ teacher.email }}</span>
+              </p>
+              <p class=" px-0 border-bottom border-separator-light">
+                <i data-acorn-icon="mobile" class="me-2" data-acorn-size="17"></i>
+                <span class="align-middle">{{ teacher.mobile }}</span>
+              </p>
+              <p class=" px-0 border-bottom border-separator-light">
+                <i data-acorn-icon="user" class="me-2" data-acorn-size="17"></i>
+                <span class="align-middle">{{ teacher.date_of_birth }}</span>
+              </p>
+              <p class=" px-0 border-bottom border-separator-light">
+                <i data-acorn-icon="user" class="me-2" data-acorn-size="17"></i>
+                <span class="align-middle">{{ teacher.gender }}</span>
+              </p>
+              <p class=" px-0">
+                <i data-acorn-icon="pin" class="me-2" data-acorn-size="17"></i>
+                <span class="align-middle">{{ teacher.address }}</span>
+              </p>
+              
+            </div>
+          </div>
+        </div>
+        <!-- Biography End -->
+      </div>
+
+  </div>
+</main>
+
+
+
+{% endblock content %}

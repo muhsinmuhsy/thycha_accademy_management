@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+
+
+    <main>
+
+        {% include 'alert.html' %}
+
+        <div class="container">
+          <div class="row">
+            <div class="col-auto d-none d-lg-flex">
+              <div class="nav " id="settingsColumn">
+                <!-- Content of this will be moved from #settingsMoveContent div based on the responsive breakpoint.  -->
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- Title and Top Buttons Start -->
+                <div class="page-title-container">
+                    <div class="row">
+                    <!-- Title Start -->
+                    <div class="col">
+                        <h1 class="mb-0 pb-0 display-4" id="title">Edit Techer</h1>
+                        <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+                        <ul class="breadcrumb pt-0">
+                            <!-- <li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="Pages.html">Pages</a></li>
+                            <li class="breadcrumb-item"><a href="Pages.Profile.html">Profile</a></li> -->
+                        </ul>
+                        </nav>
+                    </div>
+                    <!-- Title End -->
+                    </div>
+                </div>
+
+                  
+                <form action="{% url 'student-edit' student_id=student.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Public Info Start -->
+                    <h2 class="small-title">Personal Info</h2>
+                    <div class="card mb-5">
+                        <div class="card-body">
+                        
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">First Name</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <input type="text" name="first_name" value="{{ student.first_name }}" class="form-control" required  />
+                            </div>
+                            </div>
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Last Name</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <input type="text" name="last_name" value="{{ student.last_name }}" class="form-control" required  />
+                            </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Image</label>
+                                <div class="col-sm-8 col-md-9 col-lg-10">
+                                    <input type="file" name="image" accept="image/*" class="form-control"  />
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Place</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <input type="text" class="form-control" required name="place" value="{{ student.place }}" />
+                            </div>
+                            </div>
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Addrees</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <textarea class="form-control" required name="address" rows="3">{{ student.address }}</textarea>
+                            </div>
+                            
+                            </div>
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Birthday</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <input type="date" class="form-control date-picker-close" required name="date_of_birth" value="{{ student.date_of_birth|date:'Y-m-d' }}" />
+                            </div>
+                            
+                            </div>
+                            <div class="mb-3 row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Gender</label>
+                            <div class="col-sm-8 col-md-9 col-lg-10">
+                                <select class="select-single-no-search form-control" name="gender" required data-width="100%" id="genderSelect">
+                                    <option label="&nbsp;"></option>
+                                    <option value="Male" {% if student.gender == "Male" %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if student.gender == "Female" %}selected{% endif %}>Female</option>
+                                </select>
+                            </div>
+                            
+                            </div>
+
+
+                            
+                        
+                        </div>
+                    </div>
+                    <!-- Public Info End -->
+
+                    <!-- Contact Start -->
+                    <h2 class="small-title">Login Info</h2>
+                    <div class="card mb-5">
+                        <div class="card-body">
+                
+                            <div class="mb-3 row">
+                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8 col-md-9 col-lg-10">
+                                    <input type="email" name="email" class="form-control" value="{{ student.email}}" required  />
+                                </div>
+                            </div>
+                            
+                         
+                            <div class="mb-3 row">
+                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Phone</label>
+                                <div class="col-sm-8 col-md-9 col-lg-10">
+                                    <input type="text" class="form-control" value="{{ student.mobile }}" required name="mobile" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row mt-5">
+                            <div class="col-sm-8 col-md-9 col-lg-10 ms-auto">
+                                <button type="submit" class="btn btn-primary">Update student</button>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Contact End -->
+
+                </form>
+             
+            </div>
+          </div>
+        </div>
+    </main>
+      
+
+
+
+{% endblock content %}

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+<main>
+    {% include 'alert.html' %}
+    <div class="container">
+      <!-- Title and Top Buttons Start -->
+      <div class="page-title-container">
+        <div class="row g-0">
+          <!-- Title Start -->
+          <div class="col-auto mb-3 mb-md-0 me-auto">
+            <div class="w-auto sw-md-30">
+              <a href="#" class="muted-link pb-1 d-inline-block breadcrumb-back">
+                <!-- <i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
+                <span class="text-small align-middle">Home</span> -->
+              </a>
+              <h1 class="mb-0 pb-0 display-4" id="title">Teacher List</h1>
+            </div>
+          </div>
+          <!-- Title End -->
+
+          <!-- Top Buttons Start -->
+          <div class="w-100 d-md-none"></div>
+          <div class="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
+            <a href="{% url 'teacher-add' %}">
+                <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto">
+                <i data-acorn-icon="plus"></i>
+                <span>Add Teacher</span>
+                </button>
+            </a>
+            
+            
+             
+          </div>
+          <!-- Top Buttons End -->
+        </div>
+      </div>
+      <!-- Title and Top Buttons End -->
+
+      <!-- Controls Start -->
+      <div class="row mb-2">
+        <!-- Search Start -->
+        <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
+          <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
+
+            <form method="get">
+                <input type="text" name="q" placeholder="Search Teachers" class="form-control" value="{{ search_query|default_if_none:'' }}">
+                
+                <span class="search-magnifier-icon" style="cursor: pointer;" onclick="submitForm()">
+                    <i data-acorn-icon="search"></i>
+                </span>
+            </form>
+          </div>
+        </div>
+        <script>
+            function submitForm() {
+                document.querySelector('form').submit();
+            }
+        </script>
+        <!-- Search End -->
+
+        
+      
+
+      <div class="row g-0">
+        <div class="col-12 mb-5">
+          <!-- List Items Start -->
+          <div id="checkboxTable">
+            <div class="mb-4 mb-lg-3 bg-transparent no-shadow d-none d-lg-block">
+              <div class="row g-0">
+                <div class="col-auto sw-11 d-none d-lg-flex"></div>
+                <div class="col">
+                  <div class="ps-5 pe-4 h-100">
+                    <div class="row g-0 h-100 align-content-center custom-sort">
+                      <div class="col-lg-4 d-flex flex-column mb-lg-0 pe-3 d-flex">
+                        <div class="text-muted text-small cursor-pointer sort" data-sort="name">NAME</div>
+                      </div>
+                      <div class="col-lg-2 d-flex flex-column pe-1 justify-content-center">
+                        <div class="text-muted text-small cursor-pointer sort" data-sort="email">PLACE</div>
+                      </div>
+                      <div class="col-lg-3 d-flex flex-column pe-1 justify-content-center">
+                        <div class="text-muted text-small cursor-pointer sort" data-sort="phone">NUMBER</div>
+                      </div>
+                      <div class="col-lg-2 d-flex flex-column pe-1 justify-content-center">
+                        <div class="text-muted text-small cursor-pointer sort" data-sort="group">EMAIL</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Items Container Start -->
+
+            {% for teacher in teachers %}
+                <div class="card mb-2">
+                <div class="row g-0 h-100 sh-lg-9 position-relative">
+                    <a href="{% url 'teacher-view' teacher_id=teacher.id %}" class="col-auto position-relative">
+                    <img src="{{ teacher.image.url }}" alt="taecher-image" class="card-img card-img-horizontal sw-11 h-100" />
+                    </a>
+                    <div class="col py-4 py-lg-0">
+                    <div class="ps-5 pe-4 h-100">
+                        <div class="row g-0 h-100 align-content-center">
+                        <a
+                            href="{% url 'teacher-view' teacher_id=teacher.id %}"
+                            class="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
+                        >
+                            {{ teacher.first_name }} {{ teacher.last_name }}
+                            <div class="text-small text-muted text-truncate position"></div>
+                        </a>
+                        <div class="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
+                            <div class="lh-1 text-alternate">{{ teacher.place }}</div>
+                        </div>
+                        <div class="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
+                            <div class="lh-1 text-alternate">{{ teacher.mobile }}</div>
+                        </div>
+                        <div class="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
+                            <span class="badge bg-outline-primary group">{{ teacher.email }}</span>
+                        </div>
+                        <div class="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
+                          <a href="{% url 'teacher-view' teacher_id=teacher.id %}">
+                            <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+                                <i data-acorn-icon="eye" data-acorn-size="15"></i>
+                                <span class="d-none d-xxl-inline-block">View</span>
+                            </button>
+                          </a>   
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+            
+          
+           
+        </div>
+     
+      </div>
+    </div>
+  </main>
+
+{% endblock content %}

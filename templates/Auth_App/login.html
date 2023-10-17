@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  /* Center the content horizontally and vertically */
+  .position {
+    display: grid;
+    justify-content: center;
+    height: 100vh; /* Ensure the container takes the full viewport height */
+  }
+</style>
+
+
+<div class="position">
+  <!-- Background Start -->
+  <div class="fixed-background"></div>
+  <!-- Background End -->
+
+  <div class="container-fluid p-0 h-100 position-relative">
+    <div class="row g-0 h-100">
+      <!-- Left Side Start -->
+      
+      <!-- Left Side End -->
+
+      <!-- Right Side Start -->
+      <div class="col-12 col-lg-auto h-100 pb-4 px-4 pt-0 p-lg-0">
+        <div class="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
+          <div class="sw-lg-50 px-5">
+            
+            <div class="sh-11">
+              <a href="index.html">
+                <div class="logo-default"></div>
+              </a>
+            </div>
+            <div class="mb-5">
+              <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
+              <h2 class="cta-1 text-primary">let's get started!</h2>
+            </div>
+            <div class="mb-5">
+              <p class="h6">Please use your credentials to login.</p>
+              {% include 'alert.html' %}
+            </div>
+            <div>
+
+              <form  method="post" action="{% url 'login' %}" >
+                {% csrf_token %}
+                <div class="mb-3 filled form-group tooltip-end-top">
+                  <i data-acorn-icon="user"></i>
+                  <input type="text" class="form-control" name="username" required id="username" placeholder="Username" />
+                </div>
+                <div class="mb-3 filled form-group tooltip-end-top">
+                  <i data-acorn-icon="lock-off"></i>
+                  <input type="password" class="form-control pe-7" name="password" required id="password" value="" placeholder="Password*" />
+                  <!-- <a class="text-small position-absolute t-3 e-3" href="#">Forgot?</a> -->
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Login</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Side End -->
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
