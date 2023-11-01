@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+
+    <main>
+
+        {% include 'alert.html' %}
+
+        <div class="container">
+          <div class="row">
+            <div class="col-auto d-none d-lg-flex">
+              <div class="nav " id="settingsColumn">
+                <!-- Content of this will be moved from #settingsMoveContent div based on the responsive breakpoint.  -->
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- Title and Top Buttons Start -->
+                <div class="page-title-container">
+                    <div class="row">
+                    <!-- Title Start -->
+                    <div class="col">
+                        <h1 class="mb-0 pb-0 display-4" id="title">Add Attendence</h1>
+                        <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+                        <ul class="breadcrumb pt-0">
+                            <!-- <li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="Pages.html">Pages</a></li>
+                            <li class="breadcrumb-item"><a href="Pages.Profile.html">Profile</a></li> -->
+                        </ul>
+                        </nav>
+                    </div>
+                    <!-- Title End -->
+                    </div>
+                </div>
+
+                  
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Public Info Start -->
+                    <h2 class="small-title">Personal Info</h2>
+                    <div class="card mb-5">
+                        <div class="card-body">
+                        
+                            <div class="mb-3 row">
+                                <label class="mb-3">Date:</label>
+                                <div class="col-sm-8 col-md-9 col-lg-10">
+                                    <input type="date" id="date" name="date" class="form-control" required  />
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+
+                                <!-- <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">End Time</label> -->
+                                <label class="mb-3 mt-5">Stdends:</label>
+                                {% for student in students %}
+                                    <div class="col-sm-8 col-md-9 col-lg-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="student" value="{{ student.id }}"  id="gridCheck" />
+                                            <label class="form-check-label" for="gridCheck">{{ student.username }}</label>
+                                        </div>
+                                        <!-- <input type="checkbox"  name="student" value="{{ student.id }}"  required  /> {{ student.username }} -->
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                            
+
+                            <div class="mb-3 row mt-5">
+                            <div class="col-sm-8 col-md-9 col-lg-10 ms-auto">
+                                <button type="submit" class="btn btn-primary">Add Timesection</button>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Login info End -->
+
+
+                
+                </form>
+             
+            </div>
+          </div>
+        </div>
+    </main>
+      
+
+
+
+{% endblock content %}

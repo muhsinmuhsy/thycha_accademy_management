@@ -229,7 +229,30 @@
               </li>
             </ul>
           </li>
-        {% elif user.is_teacher %}
+
+          <li>
+            <a href="{% url 'timesession-list' %}">
+              <i data-acorn-icon="gear" class="icon" data-acorn-size="18"></i>
+              <span class="label">Attendence</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'studymaterial-list' %}">
+              <i data-acorn-icon="gear" class="icon" data-acorn-size="18"></i>
+              <span class="label">Study material</span>
+            </a>
+          </li>
+        {% elif user.is_teacher  %}
+          
+        
+
+        <li>
+          <a href="{% url 'timesession-list' %}">
+            <i data-acorn-icon="gear" class="icon" data-acorn-size="18"></i>
+            <span class="label">Attendence</span>
+          </a>
+        </li>
 
         {% endif %}
 

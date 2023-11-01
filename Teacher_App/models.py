@@ -9,7 +9,7 @@ class TimeSession(models.Model):
     end_time = models.TimeField()
 
 class Attendance(models.Model):
-    timeSession = models.ForeignKey(TimeSession, on_delete=models.CASCADE)
+    timesession = models.ForeignKey(TimeSession, on_delete=models.CASCADE)
     attender = models.ForeignKey(
     User,
     on_delete=models.CASCADE,
@@ -23,8 +23,20 @@ class Attendance(models.Model):
         related_name='student_attendances'
     )
     attendance = models.BooleanField(default=False)
+    date = models.DateField()
+
+    def __str__(self):
+        return str(self.date)
+
+
+
+class StudyMaterial(models.Model):
+    user = models.ForeignKey(
+    User,
+    on_delete=models.CASCADE,
+    limit_choices_to=Q(is_teacher=True) | Q(is_superuser=True),
+    related_name='studymaterial_user'
+    )
+    text = models.CharField(max_length=10000, null=True)
     date = models.DateField(auto_now=True)
-
-
-
-    
+    image = models.ImageField(upload_to='study-material', null=True)
